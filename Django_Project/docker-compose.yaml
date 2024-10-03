@@ -1,9 +1,9 @@
-version: '3.8'
+version: '3.12.4'
 
 services:
   web:
     build: .
-    command: gunicorn sociafriend.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn demoproject.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/app
     ports:

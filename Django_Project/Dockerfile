@@ -1,11 +1,15 @@
 FROM python:3.12.4
 
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt /app/
 
 RUN pip install -r requirements.txt
-COPY manage.py .
-COPY ./demoproject /app/demoproject
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000","gunicorn"]
+COPY . /app/
+
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "demoproject.wsgi:application"]
